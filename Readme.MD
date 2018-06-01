@@ -1,5 +1,5 @@
 #Notes API interview code
-###usage:
+###Setup:
 1. `composer install`
 2. `php artisan migrate`
 3. `php artisan db:seed`
@@ -12,7 +12,55 @@ seeding will insert 2 users
 2. paolo2@gmail.com
 3. password is `secret`
 
+###Examples:
+```Authorization: Basic cGFvbG8xQGdtYWlsLmNvbTpzZWNyZXQ=```
+is ```paolo1@gmail.com:secret```
 
+####List
+```
+curl -X GET \
+  http://127.0.0.1:8000/api/notes/ \
+  -H 'Authorization: Basic cGFvbG8xQGdtYWlsLmNvbTpzZWNyZXQ='
+```
+
+####Create
+```
+curl -X POST \
+  http://127.0.0.1:8000/api/notes \
+  -H 'Authorization: Basic cGFvbG8xQGdtYWlsLmNvbTpzZWNyZXQ=' \
+  -H 'Content-Type: application/json' \
+  -d '{
+	"title" : "New Note",
+	"note" : "The body"
+}'
+```
+
+####Retrieve
+```
+curl -X GET \
+  http://127.0.0.1:8000/api/notes/1 \
+  -H 'Authorization: Basic cGFvbG8xQGdtYWlsLmNvbTpzZWNyZXQ='
+```
+
+
+####Update
+```
+curl -X PUT \
+  http://127.0.0.1:8000/api/notes/1 \
+  -H 'Authorization: Basic cGFvbG8xQGdtYWlsLmNvbTpzZWNyZXQ=' \
+  -H 'Content-Type: application/json' \
+  -d '{
+	"title" : "Updated Note",
+	"note" : "Updated body"
+}'
+```
+
+####Delete
+```
+curl -X DELETE \
+  http://127.0.0.1:8000/api/notes/3 \
+  -H 'Authorization: Basic cGFvbG8xQGdtYWlsLmNvbTpzZWNyZXQ='
+```
 
 
 ####Personal Notes
