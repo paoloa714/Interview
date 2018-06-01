@@ -92,7 +92,9 @@ class NoteRepository implements RepositoryInterface
     protected function setNoteInfo(Note $note, array $noteInfo)
     {
         $note->setAttribute('title', $noteInfo['title']);
-        $note->setAttribute('note', $noteInfo['title']);
+
+        $noteText = $noteInfo['note'] ?? '';
+        $note->setAttribute('note', $noteText);
         $note->setAttribute('user_id', Auth::user()->id);
 
         return $note;
