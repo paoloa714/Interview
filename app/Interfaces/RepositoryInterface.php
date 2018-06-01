@@ -9,7 +9,7 @@
 namespace App\Interfaces;
 
 
-class RepositoryInterface
+interface RepositoryInterface
 {
 
 }

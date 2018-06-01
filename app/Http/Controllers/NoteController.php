@@ -9,7 +9,10 @@
 namespace App\Http\Controllers;
 
 
-class NoteController
+class NoteController extends Controller
 {
-
+    /**
+     * @var NoteRepository
+     */
+    protected $model;
 }
