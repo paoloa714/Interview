@@ -8,37 +8,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\NoteRepository;
 
-class NoteController extends Controller
+class NoteController extends RestfulController
 {
-    /**
-     * @var NoteRepository
-     */
-    protected $model;
-
-
-    public function list()
+    public function __construct(NoteRepository $noteRepository)
     {
-
-    }
-
-    public function create()
-    {
-
-    }
-
-    public function update()
-    {
-
-    }
-
-    public function delete()
-    {
-
-    }
-
-    public function get()
-    {
-
+        $this->model = $noteRepository;
     }
 }

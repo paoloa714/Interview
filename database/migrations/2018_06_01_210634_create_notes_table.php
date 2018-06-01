@@ -18,8 +18,8 @@ class CreateNotesTable extends Migration
             $table->index('id');
             $table->string('title' , 50);
             $table->string('note' , 1000);
-            $table->timestamp('create_time');
-            $table->timestamp('update_time');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
