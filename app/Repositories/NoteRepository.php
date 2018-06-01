@@ -17,42 +17,84 @@ use Illuminate\Support\Facades\Auth;
 
 class NoteRepository implements RepositoryInterface
 {
-    public function get(Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Note
+     */
+    public function get($id, Request $request)
     {
+        /** @var Note $note */
+        $note = Note::where('user_id', '=', Auth::user()->id)
+            ->where('id', '=', $id)->firstOrFail();
+        return $note;
     }
 
+    /**
+     * @param Request $request
+     * @return Note[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function list(Request $request)
     {
         return Note::all()
-            ->where('user_id' , '=' , Auth::user()
+            ->where('user_id', '=', Auth::user()
                 ->id);
     }
 
+    /**
+     * @param Request $request
+     * @return Note
+     */
     public function create(Request $request)
     {
         $noteInfo = $request->all();
         $note = new Note();
-        $note->setAttribute('title' , $noteInfo['title']);
-        $note->setAttribute('note' , $noteInfo['note']);
+        $this->setNoteInfo($note, $noteInfo);
 
-        $note->setAttribute('user_id' , Auth::user()->id);
         $note->save();
         return $note;
     }
 
-    public function update($id , Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Note
+     */
+    public function update($id, Request $request)
     {
         $noteInfo = $request->all();
-        var_dump($id , $noteInfo);
-        die;
-        $note = Note::findOrFail($noteInfo['id']);
-
+        /** @var Note $note */
+        $note = $this->get($id , $request);
+        $this->setNoteInfo($note, $noteInfo);
+        $note->save();
         return $note;
     }
 
-    public function delete(Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return bool
+     * @throws \Exception
+     */
+    public function delete($id, Request $request)
     {
-        // TODO: Implement delete() method.
+        $note = $this->get($id , $request);
+        $note->delete();
+
+        return true;
     }
 
+    /**
+     * @param Note $note
+     * @param array $noteInfo
+     * @return Note
+     */
+    protected function setNoteInfo(Note $note, array $noteInfo)
+    {
+        $note->setAttribute('title', $noteInfo['title']);
+        $note->setAttribute('note', $noteInfo['title']);
+        $note->setAttribute('user_id', Auth::user()->id);
+
+        return $note;
+    }
 }

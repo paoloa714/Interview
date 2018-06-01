@@ -26,3 +26,6 @@ notes controller
 Notes route
 possibly a service provider
 maybe a repository
+
+
+Validate using Request validation
