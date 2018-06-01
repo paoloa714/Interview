@@ -1,5 +1,3 @@
-Setup auth later,
-
 #Notes API interview code
 ###usage:
 1. `composer install`

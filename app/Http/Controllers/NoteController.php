@@ -10,8 +10,8 @@ namespace App\Http\Controllers;
 
 use App\Repositories\NoteRepository;
 use Illuminate\Http\Request;
-use App\Http\Requests\NoteRequest;
 use Illuminate\Support\Facades\Validator;
+
 
 class NoteController
 {
