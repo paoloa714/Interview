@@ -14,10 +14,14 @@ use Illuminate\Http\Request;
 interface RepositoryInterface
 {
 
-    public function get(Request $request);
+    public function get($id, Request $request);
+
     public function list(Request $request);
+
     public function create(Request $request);
-    public function update(Request $request);
-    public function delete(Request $request);
+
+    public function update($id, Request $request);
+
+    public function delete($id, Request $request);
 
 }

@@ -21,30 +21,30 @@ abstract class RestfulController extends Controller
 
     public function list(Request $request)
     {
-        return $this->model->list($request);
+        return ['payload' => $this->model->list($request)];
     }
 
     public function create(Request $request)
     {
-        return $this->model->create($request);
+        return ['payload' => $this->model->create($request)];
 
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        return $this->model->update($request);
+        return ['payload' => $this->model->update($id , $request)];
 
     }
 
-    public function delete(Request $request)
+    public function delete($id , Request $request)
     {
-        return $this->model->delete($request);
+        return ['payload' => $this->model->delete($id , $request)];
 
     }
 
-    public function get(Request $request)
+    public function get($id , Request $request)
     {
-        return $this->model->get($request);
+        return ['payload' => $this->model->get($id , $request)];
 
     }
 }
